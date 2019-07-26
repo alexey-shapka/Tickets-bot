@@ -1,6 +1,6 @@
-from os import remove
 import re
 import telebot
+from emoji import emojize
 import sql_functions as sqlf
 
 token_bot = ''
@@ -30,9 +30,9 @@ def event_seats_markup(table, id_event):
         row = []
         for j in range(4):
             if seats[i*4 + j]:
-                seat_marker = '{} {}'.format(str(i*4 + j + 1), '❌')
+                seat_marker = '{} {}'.format(str(i*4 + j + 1), emojize(":x:", use_aliases=True))
             else:
-                seat_marker = '{} {}'.format(str(i*4 + j + 1), '✅')
+                seat_marker = '{} {}'.format(str(i*4 + j + 1), emojize(':white_check_mark:', use_aliases=True))
             row.append(telebot.types.InlineKeyboardButton(text=seat_marker,
                        callback_data='seat-call={}={}={}'.format(table, id_event, str(i*4 + j + 1))))
         markup.add(*row)
