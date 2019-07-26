@@ -8,7 +8,7 @@ Host:
 - AWS (Amazon Linux AMI 2018.03.0).
 
 Commands:
--events;
--mytickets.
+- events;
+- mytickets.
 
 Time spent on work: ~17 hours.
