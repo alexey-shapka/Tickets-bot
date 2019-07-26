@@ -1,5 +1,6 @@
 import pymysql
 
+
 def create_connection_cursor():
     cnx = pymysql.connect(user='', password='', host='',
                         database='')
@@ -63,6 +64,7 @@ def remove_ticket_from_user(ticket, user_id):
     cnx, cursor = create_connection_cursor()
     cursor.execute("SELECT Tickets FROM Users WHERE ID = {}".format(user_id))
     old_tickets = cursor.fetchone()[0].split(',')
+    #remove ticket from ticket list
     update_tickets = [i for i in old_tickets if ticket not in i]
     if len(old_tickets) != len(update_tickets):
         cursor.execute("UPDATE Users SET Tickets = '{}' WHERE ID = {}".format(','.join(update_tickets), user_id))
@@ -137,4 +139,5 @@ def get_user_tickets(user_id):
     if response:
         return response[0]
     else:
-        return response
+        #for none result
+        return response 
