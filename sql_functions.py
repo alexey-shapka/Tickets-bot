@@ -1,6 +1,5 @@
 import pymysql
 
-
 def create_connection_cursor():
     cnx = pymysql.connect(user='', password='', host='',
                         database='')
