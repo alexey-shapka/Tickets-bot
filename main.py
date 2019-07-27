@@ -195,9 +195,10 @@ def input(message):
     #check if user exist in database
     if sqlf.get_user_info(message.chat.id):
         status = sqlf.get_user_info(message.chat.id)[4].split(' ')
+        pattern = '[^a-zA-Zа-яА-ЯіІїЇєЄёЁыЫ]+'
         if status[0] == 'inp-name':
             #clear symbols and nums from user input and set status inp-sname, add name if good input
-            name = re.sub('[^a-zA-Zа-яА-Я]+', '', message.text)
+            name = re.sub(pattern, '', message.text)
             if name:
                 if len(name) < 20:
                     sqlf.add_user_name(str(message.chat.id), name)
@@ -210,7 +211,7 @@ def input(message):
 
         elif status[0] == 'inp-sname':
             #clear symbols and nums from user input and clear status, add surname if good input
-            surname = re.sub('[^a-zA-Zа-яА-Я]+', '', message.text)
+            surname = re.sub(pattern, '', message.text)
             if surname:
                 if len(surname) < 20:
                     sqlf.add_user_surname(str(message.chat.id), surname)
